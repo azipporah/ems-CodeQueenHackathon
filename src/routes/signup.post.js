@@ -1,64 +1,41 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcrypt')
-const { check, validationResult } = require('express-validator')
+// const { check, validationResult } = require('express-validator')
 
 // schema imports
 const signupSchema = require('../models/signup.schema') //importing the userSchema file
 const districtSchema = require('../models/district.schema') //importing the userSchema file
 const hospitalSchema = require('../models/hospital.schema') //importing the hospitalSchema file
+const confirmedCaseSchema = require('../models/confirmedcases.schema') //importing the hospitalSchema file
+const caseReportSchema = require('../models/reportedcases.schema') //importing the hospitalSchema file
 const recoveredSchema = require('../models/recovered.schema') //importing the recoveredSchema file
 const deceasedSchema = require('../models/deceased.schema') //importing the deceasedSchema file
 
+// controller import
+const authController = require('../controllers/authController')
+
+
+// .............EJS ROUTES...........
+// register route
+router.get('/register', (req, res) => {
+    res.render("register.ejs")
+})
+// login route
+router.get('/login', (req, res) => {
+    res.render("login.ejs")
+})
+
+// home route
+router.get('/', (req, res) => {
+    res.render("home.ejs")
+})
 
 // ................POST ROUTES.........
-// post route for users
-router.post("/signup", [
-    check("email", "Please provide a valid email!").isEmail(),
-    check("password", "Password should be greater than 3characters.").isLength({ min: 3 })
-], async (req, res) => {
-    const user = req.body
-   
-    // checking for empty fields
-    if (!user.username) {
-        return res.status(400).json({ 'message': 'Username required!!' })
-    } else if (!user.email) {
-        return res.status(400).json({ 'message': 'Email required!!' })
-    } else if (!user.password) {
-        return res.status(400).json({ 'message': 'Password required!!' })
-    }
-    // else if (!user.role) {
-    //     return res.status(400).json({ 'message': 'Role required!!' })
-    // }
+// post routes for users
+router.post("/register", authController.register)
 
-    // validate user input
-    const errors = validationResult(req) //validationResult method from express-validator does the validation
-    if (!errors.isEmpty()) {
-        return res.status(400).json({
-            errors: errors.array()
-        })
-    }
-
-    let hashedPassword = await bcrypt.hash(user.password, 10)
-
-    const addUser = new signupSchema({
-        username: req.body.username,
-        email: req.body.email,
-        password: hashedPassword,
-        role: req.body.role
-    });
-    
-
-    try {
-        await addUser.save()
-        return res.status(201).send(addUser)
-    } catch (error) {
-        // res.status(400).send(error)
-        console.log(error);
-    }
-
-    res.send("Validation Passed!!")
-})
+router.post("/login", authController.login)
 
 //posting districts
 router.post("/districts", async (req, res) => {
@@ -94,6 +71,31 @@ router.post("/hospitals", async (req, res) => {
     }
 })
 
+
+//posting caseReports
+router.post("/caseReport", async(req, res) => {
+    const caseReport= req.body
+    const caseReportInfor = new caseReportSchema(caseReport)
+    try {
+        await caseReportInfor.save()
+        return res.status(201).send(caseReportInfor)
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
+
+//posting confirmed cases-patients
+router.post("/patients", async(req, res) => {
+    const patient= req.body
+    const patientInfor = new confirmedCaseSchema(patient)
+    try {
+        await patientInfor.save()
+        return res.status(201).send(patientInfor)
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
+
 //posting recovered cases
 router.post("/recoveredCase", async (req, res) => {
     const recovered_case = req.body
@@ -122,7 +124,7 @@ router.post("/deceasedCase", async (req, res) => {
 
 // ................GET ROUTES.........
 //fetching all users
-router.get("/all-signups", async (req, res) => {
+router.get("/signup", async (req, res) => {
     signupSchema.find().then((users) => {
         res.status(200).send(users)
     }).catch((error) => {
@@ -143,6 +145,24 @@ router.get("/all-districts", async (req, res) => {
 router.get("/all-hospitals", async (req, res) => {
     hospitalSchema.find().then((hospitals) => {
         res.status(200).send(hospitals)
+    }).catch((error) => {
+        res.status(400).send(error)
+    });
+});
+
+//fetching all reported cases
+router.get("/caseReport", async (req, res) => {
+    caseReportSchema.find().then((reportedCases) => {
+        res.status(200).send(reportedCases)
+    }).catch((error) => {
+        res.status(400).send(error)
+    });
+});
+
+//fetching all confirmed cases/patients
+router.get("/patients", async (req, res) => {
+    confirmedCaseSchema.find().then((patients) => {
+        res.status(200).send(patients)
     }).catch((error) => {
         res.status(400).send(error)
     });

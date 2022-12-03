@@ -14,16 +14,16 @@ const signupSchema = new schema({
         trim: true,
         unique: true
     },
-    password: {
+    role: {
         type: String,
         required: true
     },
-    role: {
+    password: {
         type: String,
-        enum: ['user','admin','hospital'],
         required: true
     }
 })
+
 
 const Users = mongoose.model("Users", signupSchema)
 module.exports = Users
