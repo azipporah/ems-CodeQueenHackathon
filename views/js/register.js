@@ -1,4 +1,4 @@
-link = "http://localhost:4040/signup"
+link = "http://localhost:4040/register"
 
 
 //create a todo
@@ -13,7 +13,7 @@ const createTodo = (todo) => {
         }
     }).then((res) => res.json())
         .then((data) => {
-            // console.log(data);
+            console.log(data);
             addTodoElement(data)
 
         }).catch((error) => { console.log(error) })
@@ -24,7 +24,7 @@ const createTodo = (todo) => {
 //fetching all the todos
 const fetchAllTodos = (todo) => {
     const todoData = JSON.stringify(todo);
-    fetch("http://localhost:4040/signup", {
+    fetch("http://localhost:4040/register", {
         method: "GET",
         body: todoData,
         headers: {
@@ -35,7 +35,7 @@ const fetchAllTodos = (todo) => {
         .then((res) => res.json())
         .then((data) => {
             data.forEach((todo) => {
-                addTodoElement(todo)
+                // addTodoElement(todo)
             })
         })
         .catch((error) => { console.log(error) })
@@ -52,33 +52,33 @@ const save = document.getElementById('save');
 
 
 
-const tableBody = document.getElementById('tableBody');
+// const tableBody = document.getElementById('tableBody');
 
-// creat a function 'addTodoElement' so that we can reuse the tableRow and todoTd
-const addTodoElement = (newSignup) => {
-    const { username, email, role, password } = newSignup
-    const tableRow = document.createElement("tr");
+// // creat a function 'addTodoElement' so that we can reuse the tableRow and todoTd
+// const addTodoElement = (newSignup) => {
+//     const { username, email, role, password } = newSignup
+//     const tableRow = document.createElement("tr");
 
-    const usernameTd = document.createElement("td");
-    usernameTd.innerHTML = username;
-    tableRow.appendChild(usernameTd)
+//     const usernameTd = document.createElement("td");
+//     usernameTd.innerHTML = username;
+//     tableRow.appendChild(usernameTd)
 
-    const emailTd = document.createElement("td");
-    emailTd.innerHTML = email;
-    tableRow.appendChild(emailTd)
+//     const emailTd = document.createElement("td");
+//     emailTd.innerHTML = email;
+//     tableRow.appendChild(emailTd)
 
-    const roleTd = document.createElement("td");
-    roleTd.innerHTML = role;
-    tableRow.appendChild(roleTd)
+//     const roleTd = document.createElement("td");
+//     roleTd.innerHTML = role;
+//     tableRow.appendChild(roleTd)
 
-    const passwordTd = document.createElement("td");
-    passwordTd.innerHTML = password;
-    tableRow.appendChild(passwordTd)
+//     const passwordTd = document.createElement("td");
+//     passwordTd.innerHTML = password;
+//     tableRow.appendChild(passwordTd)
 
 
-    tableBody.appendChild(tableRow);
+//     tableBody.appendChild(tableRow);
 
-}
+// }
 
 //pick values to given element
 // const getElementValue = (element) => {

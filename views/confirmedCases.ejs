@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="row">
+      <div class="col-md-6">
+        <form action="/patients" method="post">
+          <div class="mb-3">
+            <label for="pname" class="form-label">Patient name</label>
+            <input type="text" class="form-control" id="pname" name="pname" />
+          </div>
+          <div class="mb-3">
+            <label for="pAge" class="form-label">Patient age</label>
+            <input type="text" class="form-control" id="pAge" name="pAge" />
+          </div>
+          <div class="mb-3">
+            <label for="pdistrict" class="form-label">District</label>
+            <input type="text" class="form-control" id="pdistrict" name="pdistrict" />
+          </div>
+          <div class="mb-3">
+            <label for="doe" class="form-label">Date of entry</label>
+            <input type="date" class="form-control" id="doe" name="doe" />
+          </div>  
+          <div class="mb-3">
+            <label for="pcontact" class="form-label">Patient contact</label>
+            <input type="text" class="form-control" id="pcontact" name="pcontact" />
+          </div>  
+          <div class="mb-3">
+            <label for="kin" class="form-label">Next of Kin</label>
+            <input type="text" class="form-control" id="kin" name="kin" />
+          </div>  
+          <div class="mb-3">
+            <label for="kcontact" class="form-label">Next of Kin contact</label>
+            <input type="text" class="form-control" id="kcontact" name="kcontact" />
+          </div>   
+          <div class="mb-3">
+            <label for="pdesc" class="form-label">Description</label>
+            <input type="text" class="form-control" id="pdesc" name="pdesc"/>
+          </div>
+
+          <button type="submit" class="btn btn-primary" id="psave">
+            Submit
+          </button>
+        </form>
+        
+        <p>Already have an account!<a href="/login">Login here</a></p>
+      </div>
+
+      <h1>ALL PATIENTS</h1>
+      <div class="col-md-5" style="margin-top: 100px; margin-left: 50px">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">Patient name</th>
+              <th scope="col">Patient age</th>
+              <th scope="col">District</th>
+              <th scope="col">Date of entry</th>
+              <th scope="col">Patient contact</th>
+              <th scope="col">Patient NOK</th>
+              <th scope="col">NOK contact</th>
+              <th scope="col">Description</th>
+            </tr>           
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+        <!-- <a href="http://127.0.0.1:5500/src/todo.html">Back to input</a> -->
+      </div>
+    </div>
+    <script src="./js/confirmedcases.js"></script>
+  </body>
+</html>

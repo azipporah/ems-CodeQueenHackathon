@@ -24,6 +24,5 @@ const signupSchema = new schema({
     }
 })
 
-
 const Users = mongoose.model("Users", signupSchema)
 module.exports = Users

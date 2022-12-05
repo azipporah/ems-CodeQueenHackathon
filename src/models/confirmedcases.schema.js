@@ -2,7 +2,7 @@ const mongoose = require ('mongoose')
 const Schema = mongoose.Schema; //creating a schema object
 
 const patientSchema = new Schema({
-    name: {
+    patientName: {
         type:String,
         required: true
     },
@@ -18,7 +18,19 @@ const patientSchema = new Schema({
         type:Date,
         required: true
     },
-    status: {
+    patientPhoneNumber: {
+        type:Number,
+        required: true
+    },
+    nextOfKin: {
+        type:String,
+        required: true
+    },
+    nextOfKinPhoneNumber: {
+        type:Number,
+        required: true
+    },
+    description: {
         type:String,
         required: true
     }

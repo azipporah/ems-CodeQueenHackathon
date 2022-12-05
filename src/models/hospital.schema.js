@@ -2,24 +2,27 @@ const mongoose = require("mongoose")
 const schema = mongoose.Schema
 
 const hospitalSchema = new schema({
-    hospital_name: {
+    hospitalName: {
         type: String,
         required: true
     },
-    location: {
+    hospitalEmail: {
         type: String,
         required: true
     },
-    capacity: {
+    hospitalDistrict: {
         type: String,
         required: true
     },
-    status: {
+    hospitalCapacity: {
+        type: String,
+        required: true
+    },
+    hospitalStatus: {
        type: String,
-       enum: ['full','vacant'],
        required: true
     },
-    password:{
+    hospitalPassword:{
         type: String,
         required: true
     }

@@ -6,20 +6,24 @@ const caseReportSchema = new schema({
         type:String,
         required: true
     },
-    ageRange: {
+    age: {
         type:String,
+        required: true
+    },
+    personContact: {
+        type:Number,
         required: true
     },
     district: {
         type:String,
         required: true
+    }, 
+    reporterContact: {
+        type:Number,
+        required: true
     },
     description: {
         type:String,
-        required: true
-    },
-    phoneNumber: {
-        type:Number,
         required: true
     },
     dateOfReport: {
